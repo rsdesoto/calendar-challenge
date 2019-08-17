@@ -1,5 +1,33 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## Challenge
+- create a simple React calendar app
+- Must use React
+- Code must be source controlled in a public git repo
+- You can use any other open source tools to help you
+
+## App specs
+- Display all dates for at least current month
+- Appointments cannot be created in the past
+- Appointments should appear on the calendar
+- No two appointments should overlap
+- If an appointment exists for a day, a warning should display
+- Appointments can be edited and deleted
+
+## Tentative plan
+- find the start of the current month (date and day of the week) using moment.js. use this to fill in the days of the month
+- any days before today are greyed out and can't be interacted with
+- each day has the number of the day; the area below that is the appointment
+- include start/end times for dates
+
+- first: get the calendar displaying for the month
+- second: add the functionality to select a date and add an appointment
+- third: add the ability to check if an appointment exists already
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
