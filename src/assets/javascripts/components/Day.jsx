@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import classnames from 'classnames'
 
 export default class Day extends React.Component {
   static propTypes = {
@@ -8,11 +9,15 @@ export default class Day extends React.Component {
     onClick: PropTypes.func
   }
 
+  // <div className="Day"
+
   render() {
+    const { day, enabled } = this.props
+
     return (
-      <div className="Day">
+      <div className={classnames("Day", {'disabled-day': !enabled})}>
         <div className="day-number">
-          {this.props.day}
+          { enabled ? day : null }
         </div>
         <div className="day-info"
           onClick={this._temptest}

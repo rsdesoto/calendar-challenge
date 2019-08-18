@@ -1,5 +1,4 @@
 .Day {
-
   border: 1px solid black;
   width: 70px;
   height: 70px;
@@ -15,5 +14,9 @@
   .day-info {
     width: 100%;
     height: 50px;
+  }
+
+  &.disabled-day {
+    background-color: gray;
   }
 }

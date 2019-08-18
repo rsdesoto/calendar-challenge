@@ -6,7 +6,7 @@ import Day from './Day'
 
 export default class Week extends React.Component {
   static propTypes = {
-    startDay: PropTypes.string
+    startDay: PropTypes.number
   }
 
   // for each week - get the start date of that sunday
@@ -14,10 +14,11 @@ export default class Week extends React.Component {
   // if the number is positive, create a Day with that number
 
   render() {
-    const startDay = -3
+    const { startDay } = this.props
     // for testing - August 2019
     // Sunday is the July 28th - -3
-    const weekDays = [-3, -2, -1, 0, 1, 2, 3]
+
+    const weekDays = _.range(startDay, startDay+7)
 
     _.map(weekDays, function(weekDay) {
       console.log(weekDay)
@@ -31,10 +32,17 @@ export default class Week extends React.Component {
   }
 
   _renderDay = (weekDay) => {
+    let enabled = true
+
+    if (weekDay < 1) {
+      enabled = false
+    }
+
     return (
       <Day
         day={weekDay}
         key={weekDay}
+        enabled={enabled}
       />
     )
   }

@@ -19,7 +19,9 @@ export default class Calendar extends React.Component {
       <div className="Calendar">
         <div className="week-header">
         </div>
-        <Week />
+        <Week
+          startDay={-3}
+        />
 
       </div>
     )
