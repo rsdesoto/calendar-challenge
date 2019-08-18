@@ -5,10 +5,28 @@ import moment from 'moment'
 import Week from './Week'
 import WeekHeader from './WeekHeader'
 import MonthHeader from './MonthHeader'
+import SchedulingForm from './SchedulingForm'
 
 export default class Calendar extends React.Component {
   static propTypes = {
 
+  }
+
+  // calendar state:
+  // appointments is an empty array
+  // on componentDidDmount, check localstorage for appointments
+  // update appointments in state accordingly
+  // appointment editor collapsed - this hides/shows the appointment section
+
+  constructor(props) {
+    super(props)
+
+    const initialState = {
+      appointments: [],
+      appointmentEditorCollapsed: true
+    }
+
+    this.state = initialState
   }
 
   // each calendar will be made up of Weeks
@@ -17,6 +35,8 @@ export default class Calendar extends React.Component {
 
 
   render() {
+
+    const { appointments, appointmentEditorCollapsed } = this.state
 
     // date and time manipulation to create the calendar
     const now = moment()
@@ -40,6 +60,8 @@ export default class Calendar extends React.Component {
         />
         <WeekHeader />
         {_.map(weekStarts, this._renderWeek)}
+        { appointmentEditorCollapsed ? null : <SchedulingForm onCancel={this._hideAppointmentForm}/> }
+
       </div>
     )
   }
@@ -49,6 +71,7 @@ export default class Calendar extends React.Component {
       <Week
         startDay={startDay}
         key={startDay}
+        onClickDay={this._onClickDay}
       />
     )
   }
@@ -62,7 +85,15 @@ export default class Calendar extends React.Component {
       weekStarts.push(i)
       i += 7
     }
-    
     return weekStarts
+  }
+
+  _onClickDay = () => {
+    // need to: show the form, seed what day
+    this.setState({appointmentEditorCollapsed: false})
+  }
+
+  _hideAppointmentForm = () => {
+    this.setState({appointmentEditorCollapsed: true})
   }
 }

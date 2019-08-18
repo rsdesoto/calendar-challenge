@@ -27,5 +27,6 @@ export default class Day extends React.Component {
 
   _temptest = () => {
     console.log("clicked me")
+    this.props.onClick()
   }
 }

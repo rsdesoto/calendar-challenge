@@ -21,14 +21,36 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - each day has the number of the day; the area below that is the appointment
 - include start/end times for dates
 
-- first: get the calendar displaying for the month
+- first: get the calendar displaying for the month - DONE
 - second: add the functionality to select a date and add an appointment
 - third: add the ability to check if an appointment exists already
 
+- for creating a new appointment - click the button and bring up a div with date, time, description
+- if an appointment is passed to it (an appointment exists) bring up a disabled field and show the existing appointment information
+- edit and delete buttons are enabled
+
+
+- appointments - stored as simple key-value pairs
+ex:
+`{
+  august: {
+    1: {
+      start: 2pm,
+      end: 4pm,
+      description: "dentist"
+    },
+    3: {
+      start: 1pm,
+      end: 6pm,
+      description: "dinner"
+    }
+  }
+}`
+
 
 ## Technologies used
-- lodash  
-- classnames 
+- lodash
+- classnames
 - sass
 
 
