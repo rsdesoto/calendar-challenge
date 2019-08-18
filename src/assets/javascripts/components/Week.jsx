@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import _ from 'lodash'
 
 import Day from './Day'
 
-export default class FilterList extends React.Component {
+export default class Week extends React.Component {
   static propTypes = {
     startDay: PropTypes.string
   }
@@ -16,15 +17,25 @@ export default class FilterList extends React.Component {
     const startDay = -3
     // for testing - August 2019
     // Sunday is the July 28th - -3
+    const weekDays = [-3, -2, -1, 0, 1, 2, 3]
 
-
+    _.map(weekDays, function(weekDay) {
+      console.log(weekDay)
+    })
 
     return (
       <div className="Week">
-        <Day
-          day={3}
-        />
+        {_.map(weekDays, this._renderDay)}
       </div>
+    )
+  }
+
+  _renderDay = (weekDay) => {
+    return (
+      <Day
+        day={weekDay}
+        key={weekDay}
+      />
     )
   }
 }

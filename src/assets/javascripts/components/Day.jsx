@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-export default class FilterList extends React.Component {
+export default class Day extends React.Component {
   static propTypes = {
     day: PropTypes.number,
     enabled: PropTypes.bool,
