@@ -1,7 +1,8 @@
 .Day {
   border: 1px solid black;
-  width: 70px;
+  width: $daywidth;
   height: 70px;
+  box-sizing: border-box;
 
   .day-number {
     font-weight: bold;
@@ -17,6 +18,6 @@
   }
 
   &.disabled-day {
-    background-color: gray;
+    background-color: $tempcolor;
   }
 }

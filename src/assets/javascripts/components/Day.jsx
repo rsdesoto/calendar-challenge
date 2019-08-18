@@ -9,8 +9,6 @@ export default class Day extends React.Component {
     onClick: PropTypes.func
   }
 
-  // <div className="Day"
-
   render() {
     const { day, enabled } = this.props
 

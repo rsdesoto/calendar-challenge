@@ -1,0 +1,13 @@
+.WeekHeader {
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+
+  .day-header{
+    width: $daywidth;
+    border: 1px solid black;
+    padding: 5px 0;
+    box-sizing: border-box;
+  }
+}
