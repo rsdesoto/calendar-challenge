@@ -26,6 +26,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - third: add the ability to check if an appointment exists already
 
 
+## Technologies used
+- lodash  
+- classnames 
+- sass
 
 
 ## Available Scripts

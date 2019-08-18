@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import moment from 'moment'
 
 import Week from './Week'
 import WeekHeader from './WeekHeader'
@@ -17,7 +18,20 @@ export default class Calendar extends React.Component {
 
   render() {
 
-    const weekStarts = [-3, 4, 11, 18, 25]
+    // date and time manipulation to create the calendar
+    const now = moment()
+
+    // get the day of the week of the first day of the month
+    const calendarStartOffset = now.startOf('month').day()
+
+    // get the total number of days for this month
+    const monthEnd = now.daysInMonth()
+
+    // get the starting day number to generate the calendar
+    const firstWeekStartDate = 1 - calendarStartOffset
+
+    // get the array of Sunday dates
+    const weekStarts = this._getWeekStarts(firstWeekStartDate, monthEnd)
 
     return (
       <div className="Calendar">
@@ -39,11 +53,16 @@ export default class Calendar extends React.Component {
     )
   }
 
-  _getStartDate = () => {
-    return null
-  }
+  _getWeekStarts = (start, end) => {
+    const weekStarts = []
 
-  _getWeekStarts = () => {
-    return null
+    let i = start
+
+    while (i <= end) {
+      weekStarts.push(i)
+      i += 7
+    }
+    
+    return weekStarts
   }
 }

@@ -20,10 +20,6 @@ export default class Week extends React.Component {
 
     const weekDays = _.range(startDay, startDay+7)
 
-    _.map(weekDays, function(weekDay) {
-      console.log(weekDay)
-    })
-
     return (
       <div className="Week">
         {_.map(weekDays, this._renderDay)}
