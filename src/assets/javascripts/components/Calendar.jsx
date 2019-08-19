@@ -70,21 +70,6 @@ export default class Calendar extends React.Component {
   }
 
   _renderAppointmentEditor = () => {
-
-    const { appointments, date } = this.state
-
-    if (appointments[date]) {
-      console.log("appointment exists")
-    }
-
-    // if an appointment exists:
-      // send a boolean saying it exists
-      // send the value of appointment desc
-      // render a warning
-      // render an edit/delete button
-
-      // note - once this is done, everything except "can't create appointments in the past" is done from main requirements
-
     return (
       <SchedulingForm
         onCancel={this._hideAppointmentForm}
