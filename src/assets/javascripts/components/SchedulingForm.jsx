@@ -9,24 +9,32 @@ export default class SchedulingForm extends React.Component {
     appointment: PropTypes.object,
     onSave: PropTypes.func,
     onCancel: PropTypes.func,
+    updateValue: PropTypes.func,
+    value: PropTypes.string,
   }
 
+  // <Button disabled={true}> Save </Button>
+
   render() {
-    const {onCancel} = this.props
+    const { onCancel, onSave, value } = this.props
     return (
       <div className="SchedulingForm">
         <TextInput
           disabled={false}
           label={"Schedule An Appointment:"}
           placeholder={"Enter an appointment"}
-          value={""}
-          onChange={() => {console.log("onchange clicked")}}
+          value={value}
+          onChange={this._onChange}
           id={"12345"}
         />
-        <Button disabled={true}> Save </Button>
+        <Button onClick={() => {onSave(3, "hello", "3AM", "10AM")}}> Save </Button>
         <Button onClick={onCancel}> Cancel </Button>
       </div>
     )
+  }
+
+  _onChange = (event) => {
+    this.props.updateValue(event.target.value)
   }
 }
 

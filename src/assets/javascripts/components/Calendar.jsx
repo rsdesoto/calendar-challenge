@@ -18,15 +18,30 @@ export default class Calendar extends React.Component {
   // update appointments in state accordingly
   // appointment editor collapsed - this hides/shows the appointment section
 
+  // state - also needs the date, description, start, end times
+  // of an appointment selected
+
+  // note - switch initial state out - need to use this for resetting state after
+  // an appointment has been added
+
   constructor(props) {
     super(props)
 
     const initialState = {
-      appointments: [],
-      appointmentEditorCollapsed: true
+      appointments: {}
     }
 
-    this.state = initialState
+    this.state = _.merge(initialState, this._clearState())
+  }
+
+  _clearState = () => {
+    return {
+      appointmentEditorCollapsed: true,
+      date: 0,
+      description: "",
+      start: "",
+      end: ""
+    }
   }
 
   // each calendar will be made up of Weeks
@@ -60,9 +75,20 @@ export default class Calendar extends React.Component {
         />
         <WeekHeader />
         {_.map(weekStarts, this._renderWeek)}
-        { appointmentEditorCollapsed ? null : <SchedulingForm onCancel={this._hideAppointmentForm}/> }
+        { appointmentEditorCollapsed ? null : this._renderAppointmentEditor() }
 
       </div>
+    )
+  }
+
+  _renderAppointmentEditor = () => {
+    return (
+      <SchedulingForm
+        onCancel={this._hideAppointmentForm}
+        onSave={this._onSaveAppointment}
+        updateValue={(appointmentText) => {this.setState({description: appointmentText})}}
+        value={this.state.description}
+      />
     )
   }
 
@@ -88,12 +114,46 @@ export default class Calendar extends React.Component {
     return weekStarts
   }
 
-  _onClickDay = () => {
+  _onClickDay = (month, date) => {
     // need to: show the form, seed what day
-    this.setState({appointmentEditorCollapsed: false})
+
+    // note: temp placeholders
+    const start = "10AM"
+    const end = "11AM"
+
+    this.setState({
+      appointmentEditorCollapsed: false,
+      date: date,
+      start: start,
+      end: end
+    }, () => {
+      console.log(this.state)
+    })
   }
 
   _hideAppointmentForm = () => {
     this.setState({appointmentEditorCollapsed: true})
+  }
+
+  _updateAppointmentDescription = (event) => {
+    this.setState({
+      description: event.target.value
+    })
+  }
+
+  _onSaveAppointment = () => {
+    const { appointments, date, description, start, end } = this.state
+
+    const appointmentDetails = {
+      description: description,
+      start: start,
+      end: end
+    }
+
+    appointments[date] = appointmentDetails
+
+    this.setState({
+      appointments
+    }, () => {this.setState(this._clearState())})
   }
 }
