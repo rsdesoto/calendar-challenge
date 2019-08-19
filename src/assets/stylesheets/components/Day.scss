@@ -1,7 +1,7 @@
 .Day {
   border: 1px solid black;
   width: $daywidth;
-  height: 70px;
+  height: $dayheight;
   box-sizing: border-box;
 
   .day-number {
@@ -19,5 +19,14 @@
 
   &.disabled-day {
     background-color: $tempcolor;
+  }
+
+  .appointment-description {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .appointment-time {
+    font-size: 12px;
   }
 }

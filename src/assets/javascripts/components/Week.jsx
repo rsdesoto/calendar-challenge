@@ -7,7 +7,8 @@ import Day from './Day'
 export default class Week extends React.Component {
   static propTypes = {
     startDay: PropTypes.number,
-    onClickDay: PropTypes.func
+    onClickDay: PropTypes.func,
+    appointments: PropTypes.object
   }
 
   // for each week - get the start date of that sunday
@@ -39,6 +40,7 @@ export default class Week extends React.Component {
         key={weekDay}
         enabled={enabled}
         onClick={this.props.onClickDay}
+        appointments={this.props.appointments}
       />
     )
   }

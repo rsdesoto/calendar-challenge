@@ -30,7 +30,7 @@ export default class Calendar extends React.Component {
   //////////////////////////////////////////////////////////////////////////
 
   render() {
-    const { appointments, appointmentEditorCollapsed } = this.state
+    const { appointmentEditorCollapsed } = this.state
 
     // date and time manipulation to create the calendar
     const now = moment()
@@ -57,11 +57,14 @@ export default class Calendar extends React.Component {
   }
 
   _renderWeek = (startDay) => {
+    const { appointments } = this.state
+
     return (
       <Week
         startDay={startDay}
         key={startDay}
         onClickDay={this._onClickDay}
+        appointments={appointments}
       />
     )
   }
