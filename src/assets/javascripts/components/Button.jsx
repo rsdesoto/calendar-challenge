@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-
 export default class Button extends React.Component {
   static propTypes = {
     children: PropTypes.node,

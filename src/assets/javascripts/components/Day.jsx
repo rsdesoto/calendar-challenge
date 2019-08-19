@@ -18,15 +18,10 @@ export default class Day extends React.Component {
           { enabled ? day : null }
         </div>
         <div className="day-info"
-          onClick={() => {this._temptest(day)}}
+          onClick={() => {this.props.onClick("august",day)}}
         >
         </div>
       </div>
     )
-  }
-
-  _temptest = (day) => {
-    console.log("clicked me")
-    this.props.onClick("august",day)
   }
 }

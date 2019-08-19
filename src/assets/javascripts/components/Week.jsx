@@ -16,8 +16,6 @@ export default class Week extends React.Component {
 
   render() {
     const { startDay } = this.props
-    // for testing - August 2019
-    // Sunday is the July 28th - -3
 
     const weekDays = _.range(startDay, startDay+7)
 

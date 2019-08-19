@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import TextInput from './TextInput'
 import Button from './Button'
+import TextInput from './TextInput'
 
 export default class SchedulingForm extends React.Component {
   static propTypes = {

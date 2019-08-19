@@ -22,7 +22,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - include start/end times for dates
 
 - first: get the calendar displaying for the month - DONE
-- second: add the functionality to select a date and add an appointment
+- second: add the functionality to select a date and add an appointment - DONE
+- 2.5: render the appointments that exist
 - third: add the ability to check if an appointment exists already
 
 - for creating a new appointment - click the button and bring up a div with date, time, description
@@ -52,6 +53,7 @@ ex:
 - lodash
 - classnames
 - sass
+- momentjs
 
 
 ## Available Scripts
