@@ -8,7 +8,9 @@ export default class Week extends React.Component {
   static propTypes = {
     startDay: PropTypes.number,
     onClickDay: PropTypes.func,
-    appointments: PropTypes.object
+    appointments: PropTypes.object,
+    daysInMonth: PropTypes.number,
+    dayOfMonth: PropTypes.number
   }
 
   // for each week - get the start date of that sunday
@@ -28,9 +30,16 @@ export default class Week extends React.Component {
   }
 
   _renderDay = (weekDay) => {
+    const { onClickDay, appointments, daysInMonth, dayOfMonth } = this.props
+
+    let valid = true
     let enabled = true
 
-    if (weekDay < 1) {
+    if (weekDay < 1 || weekDay > daysInMonth) {
+      valid = false
+    }
+
+    if (weekDay < dayOfMonth) {
       enabled = false
     }
 
@@ -38,9 +47,10 @@ export default class Week extends React.Component {
       <Day
         day={weekDay}
         key={weekDay}
+        valid={valid}
+        onClick={onClickDay}
+        appointments={appointments}
         enabled={enabled}
-        onClick={this.props.onClickDay}
-        appointments={this.props.appointments}
       />
     )
   }

@@ -18,7 +18,11 @@
   }
 
   &.disabled-day {
-    background-color: $tempcolor;
+    background-color: #ECECEC;
+  }
+
+  &.invalid-day {
+    background-color: $tempcolor !important;
   }
 
   .appointment-description {

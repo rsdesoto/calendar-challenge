@@ -31,6 +31,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - edit and delete buttons are enabled
 
 
+- add -- can't save without entering SOMETHING
+
+
 - appointments - stored as simple key-value pairs
 ex:
 `{

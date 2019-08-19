@@ -6,21 +6,22 @@ import _ from 'lodash'
 export default class Day extends React.Component {
   static propTypes = {
     day: PropTypes.number,
+    valid: PropTypes.bool,
     enabled: PropTypes.bool,
     onClick: PropTypes.func,
     appointments: PropTypes.object
   }
 
   render() {
-    const { day, enabled } = this.props
+    const { day, valid, enabled } = this.props
 
     return (
-      <div className={classnames("Day", {'disabled-day': !enabled})}>
+      <div className={classnames("Day", {'invalid-day': !valid, 'disabled-day': !enabled})}>
         <div className="day-number">
-          { enabled ? day : null }
+          { valid ? day : null }
         </div>
         <div className="day-info"
-          onClick={() => {this.props.onClick("august",day)}}
+          onClick={() => {this._onClickDay(day)}}
         >
           {this._renderAppointment()}
         </div>
@@ -28,9 +29,18 @@ export default class Day extends React.Component {
     )
   }
 
+  _onClickDay = (day) => {
+    const { valid, enabled, onClick } = this.props
+
+    if (valid && enabled) {
+      onClick("august",day)
+    } else if (valid) {
+      alert("Can't make past appointments")
+    }
+  }
+
   _renderAppointment = () => {
     const { day, appointments } = this.props
-
 
     if (!_.has(appointments, day)) {
       return null
