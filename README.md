@@ -57,6 +57,7 @@ ex:
 - classnames
 - sass
 - momentjs
+- proptypes
 
 
 ## Available Scripts

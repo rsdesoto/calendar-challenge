@@ -30,6 +30,20 @@ export default class SchedulingForm extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.date !== prevProps.date) {
+      let editing = true
+
+      if (this.props.appointment.description) {
+        editing = false
+      }
+
+      this.setState({
+        editing: editing
+      })
+    }
+  }
+
   render() {
     const { date, appointment } = this.props
     const { editing } = this.state
@@ -100,22 +114,3 @@ export default class SchedulingForm extends React.Component {
     this.props.updateValue(event.target.value)
   }
 }
-
-// if there IS an appintment -
-// display a "appointment scheduled!" notice
-// make buttons, textinput all disabled
-//
-// {
-//   august: {
-//     1: {
-//       start: 2pm,
-//       end: 4pm,
-//       description: "dentist"
-//     },
-//     3: {
-//       start: 1pm,
-//       end: 6pm,
-//       description: "dinner"
-//     }
-//   }
-// }
