@@ -9,7 +9,8 @@ export default class Day extends React.Component {
     valid: PropTypes.bool,
     enabled: PropTypes.bool,
     onClick: PropTypes.func,
-    appointments: PropTypes.object
+    appointments: PropTypes.object,
+    month: PropTypes.string
   }
 
   render() {
@@ -30,10 +31,10 @@ export default class Day extends React.Component {
   }
 
   _onClickDay = (day) => {
-    const { valid, enabled, onClick } = this.props
+    const { valid, enabled, onClick, month } = this.props
 
     if (valid && enabled) {
-      onClick("august",day)
+      onClick(month,day)
     } else if (valid) {
       alert("Can't make past appointments")
     }

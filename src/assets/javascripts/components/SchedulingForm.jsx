@@ -48,8 +48,10 @@ export default class SchedulingForm extends React.Component {
 
     return (
       <div className="SchedulingForm">
-        { (appointment.description) ? this._renderExistingAppointmentWarning() : null }
-        { editing ? this._renderAppointmentInput() : null }
+        <div className="scheduling-form-contents">
+          { (appointment.description) ? this._renderExistingAppointmentWarning() : null }
+          { editing ? this._renderAppointmentInput() : null }
+        </div>
       </div>
     )
   }
@@ -60,7 +62,7 @@ export default class SchedulingForm extends React.Component {
     return (
       <div className="existing-appointment-warning">
       <div>
-        An appointment has already been scheduled for {month} {date.toString()}!
+        An appointment has already been scheduled for {date.toString()} {month}!
         </div>
         <div>Would you like to edit it?</div>
         <Button
@@ -83,7 +85,7 @@ export default class SchedulingForm extends React.Component {
       <div>
         <TextInput
           disabled={false}
-          label={`Schedule An Appointment for ${month} ${date.toString()}:`}
+          label={`Schedule An Appointment for ${date.toString()} ${month}:`}
           placeholder={"Enter an appointment"}
           value={value}
           onChange={this._onChange}

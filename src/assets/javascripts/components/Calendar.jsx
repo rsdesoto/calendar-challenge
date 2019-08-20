@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import moment from 'moment'
 
@@ -9,9 +10,9 @@ import WeekHeader from './WeekHeader'
 
 export default class Calendar extends React.Component {
   static propTypes = {
-
+    now: PropTypes.object,
+    month: PropTypes.string
   }
-
 
   constructor(props) {
     super(props)
@@ -29,21 +30,20 @@ export default class Calendar extends React.Component {
     const { appointmentEditorCollapsed } = this.state
 
     // date and time manipulation to create the calendar
-    const now = moment()
+    // const now = moment()
+
+    const currMonthDate = moment(this.props.month)
 
     // get the day of the week of the first day of the month
-    const calendarStartOffset = now.startOf('month').day()
-
-    // get the total number of days for this month
-    const monthEnd = now.daysInMonth()
+    const calendarStartOffset = currMonthDate.startOf('month').day()
 
     // get the array of Sunday dates
-    const weekStarts = this._getWeekStarts(1 - calendarStartOffset, monthEnd)
+    const weekStarts = this._getWeekStarts(1 - calendarStartOffset, this.state.daysInMonth)
 
     return (
       <div className="Calendar">
         <MonthHeader
-          month={now.format("MMMM")}
+          month={this.props.month}
         />
         <WeekHeader />
         {_.map(weekStarts, this._renderWeek)}
@@ -53,7 +53,7 @@ export default class Calendar extends React.Component {
   }
 
   _renderWeek = (startDay) => {
-    const { appointments, daysInMonth, dayOfMonth } = this.state
+    const { appointments, daysInMonth, dayOfMonth, month } = this.state
 
     return (
       <Week
@@ -63,6 +63,7 @@ export default class Calendar extends React.Component {
         appointments={appointments}
         daysInMonth={daysInMonth}
         dayOfMonth={dayOfMonth}
+        month={month}
       />
     )
   }
@@ -70,6 +71,7 @@ export default class Calendar extends React.Component {
   _renderAppointmentEditor = () => {
 
     const { appointments, date } = this.state
+    const { month } = this.props
 
     let existingAppointment = {}
 
@@ -87,7 +89,7 @@ export default class Calendar extends React.Component {
         updateTimeValue={(appointmentTime) => {this.setState({time: appointmentTime})}}
         time={this.state.time}
         date={date}
-        month={moment().format("MMMM")}
+        month={month}
         appointment={existingAppointment}
       />
     )
@@ -100,7 +102,7 @@ export default class Calendar extends React.Component {
     to display it on the calendar
   */
   _onSaveAppointment = () => {
-    const { appointments, date, description, time } = this.state
+    const { appointments, date, description, time, month } = this.state
 
     const appointmentDetails = {
       description: description,
@@ -108,6 +110,11 @@ export default class Calendar extends React.Component {
     }
 
     appointments[date] = appointmentDetails
+    console.log(appointments)
+
+    const monthObj = {}
+    monthObj[month] = appointments
+    console.log(monthObj)
 
     this.setState(_.merge({appointments}, this._clearSelectedAppointment()))
   }
@@ -172,23 +179,24 @@ export default class Calendar extends React.Component {
     declaration and after using save/cancel
   */
   _clearSelectedAppointment = () => {
+    const currMonthDate = moment(this.props.month)
 
-    // date and time manipulation to create the calendar
-    const now = moment()
+    const month = currMonthDate.format("M")
 
-    // get the total number of days for this month
-    const monthEnd = now.daysInMonth()
+    let dayOfMonth = 0
 
-    const month = now.format("M")
+    if (moment().format("M") === month) {
+      dayOfMonth = moment().date()
+    }
 
-    const dayOfMonth = moment().date()
+    const daysInMonth = currMonthDate.daysInMonth()
 
     return {
       appointmentEditorCollapsed: true,
       date: 0,
       description: "",
       time: "12:00",
-      daysInMonth: monthEnd,
+      daysInMonth: daysInMonth,
       month: month,
       dayOfMonth: dayOfMonth
     }

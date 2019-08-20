@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 
-import Calendar from './assets/javascripts/components/Calendar'
+import CalendarContainer from './assets/javascripts/components/CalendarContainer'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Calendar />
+        <CalendarContainer />
       </header>
     </div>
   );
