@@ -48,8 +48,7 @@ export default class Day extends React.Component {
       return (
         <div>
           <div className="appointment-description">{appointments[day].description}</div>
-          <div className="appointment-time">{`Start: ${appointments[day].start}`}</div>
-          <div className="appointment-time">{`End: ${appointments[day].end}`}</div>
+          <div className="appointment-time">{`Time: ${appointments[day].time}`}</div>
         </div>
       )
     }

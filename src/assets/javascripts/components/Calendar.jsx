@@ -84,6 +84,8 @@ export default class Calendar extends React.Component {
         onDelete={this._onDeleteAppointment}
         updateValue={(appointmentText) => {this.setState({description: appointmentText})}}
         value={this.state.description}
+        updateTimeValue={(appointmentTime) => {this.setState({time: appointmentTime})}}
+        time={this.state.time}
         date={date}
         month={moment().format("MMMM")}
         appointment={existingAppointment}
@@ -98,12 +100,11 @@ export default class Calendar extends React.Component {
     to display it on the calendar
   */
   _onSaveAppointment = () => {
-    const { appointments, date, description, start, end } = this.state
+    const { appointments, date, description, time } = this.state
 
     const appointmentDetails = {
       description: description,
-      start: start,
-      end: end
+      time: time
     }
 
     appointments[date] = appointmentDetails
@@ -124,23 +125,21 @@ export default class Calendar extends React.Component {
     for creating/editing an appointment
   */
   _onClickDay = (month, date) => {
-    // note: temp placeholders
-    const start = "10AM"
-    const end = "11AM"
 
     const { appointments } = this.state
 
     let description = ""
+    let time = "12:00"
 
     if (appointments[date]) {
       description = appointments[date].description
+      time = appointments[date].time
     }
 
     this.setState({
       appointmentEditorCollapsed: false,
       date: date,
-      start: start,
-      end: end,
+      time: time,
       description: description
     })
   }
@@ -150,13 +149,6 @@ export default class Calendar extends React.Component {
   */
   _hideAppointmentForm = () => {
     this.setState({appointmentEditorCollapsed: true})
-  }
-
-  /*
-    Updates the value associated with the Appointment Description input field
-  */
-  _updateAppointmentDescription = (event) => {
-    this.setState({description: event.target.value})
   }
 
   /*
@@ -195,8 +187,7 @@ export default class Calendar extends React.Component {
       appointmentEditorCollapsed: true,
       date: 0,
       description: "",
-      start: "",
-      end: "",
+      time: "12:00",
       daysInMonth: monthEnd,
       month: month,
       dayOfMonth: dayOfMonth

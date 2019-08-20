@@ -3,6 +3,7 @@ import React from 'react'
 
 import Button from './Button'
 import TextInput from './TextInput'
+import TimeInput from './TimeInput'
 
 export default class SchedulingForm extends React.Component {
   static propTypes = {
@@ -14,6 +15,8 @@ export default class SchedulingForm extends React.Component {
     value: PropTypes.string,
     date: PropTypes.number,
     month: PropTypes.string,
+    time: PropTypes.string,
+    updateTimeValue: PropTypes.func
   }
 
   constructor(props) {
@@ -74,7 +77,7 @@ export default class SchedulingForm extends React.Component {
 
   _renderAppointmentInput = () => {
 
-    const { onCancel, onSave, value, date, month } = this.props
+    const { onCancel, onSave, value, date, month, time } = this.props
 
     return (
       <div>
@@ -84,9 +87,20 @@ export default class SchedulingForm extends React.Component {
           placeholder={"Enter an appointment"}
           value={value}
           onChange={this._onChange}
-          id={"12345"}
+          id={"appointment-text-description"}
         />
-        <Button onClick={onSave}> Save </Button>
+        <TimeInput
+          label={"Time:"}
+          value={time}
+          onChange={this._onTimeChange}
+          id={"appointment-time"}
+        />
+        <Button
+          onClick={onSave}
+          disabled={(value.trim() === "")}
+        >
+          Save
+        </Button>
         <Button onClick={onCancel}> Cancel </Button>
       </div>
     )
@@ -100,5 +114,9 @@ export default class SchedulingForm extends React.Component {
 
   _onChange = (event) => {
     this.props.updateValue(event.target.value)
+  }
+
+  _onTimeChange = (event) => {
+    this.props.updateTimeValue(event.target.value)
   }
 }

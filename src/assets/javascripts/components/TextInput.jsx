@@ -3,7 +3,6 @@ import React from 'react'
 
 export default class TextInput extends React.Component {
   static propTypes = {
-    disabled: PropTypes.bool,
     label: PropTypes.string,
     placeholder: PropTypes.string,
     value: PropTypes.string,
@@ -11,12 +10,8 @@ export default class TextInput extends React.Component {
     id: PropTypes.string,
   }
 
-  static defaultProps = {
-    disabled: false,
-  }
-
   render() {
-    const { id, label, placeholder, disabled, onChange, value } = this.props
+    const { id, label, placeholder, onChange, value } = this.props
 
     return (
       <div className="TextInput">
@@ -25,7 +20,6 @@ export default class TextInput extends React.Component {
         </div>
         <input
           placeholder={placeholder}
-          disabled={disabled}
           type="text"
           onChange={onChange}
           value={value}
