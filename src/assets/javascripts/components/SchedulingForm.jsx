@@ -57,12 +57,15 @@ export default class SchedulingForm extends React.Component {
   }
 
   _renderExistingAppointmentWarning = () => {
-    const { onCancel, onDelete, month, date } = this.props
+    const { onCancel, onDelete, month, date, appointment } = this.props
 
     return (
       <div className="existing-appointment-warning">
-      <div>
-        An appointment has already been scheduled for {date.toString()} {month}!
+        <div>
+          An appointment has already been scheduled for {date.toString()} {month}!
+        </div>
+        <div className="existing-appointment-description">
+          {appointment.description} at {appointment.time}
         </div>
         <div>Would you like to edit it?</div>
         <Button

@@ -9,20 +9,23 @@
     border-bottom: 1px solid black;
     font-size: 16px;
     padding: 0 5px;
-    height: 20px;
+    height: $daynumberheight;
   }
 
   .day-info {
     width: 100%;
-    height: 50px;
+    height: $dayheight - $daynumberheight;
+    padding: 2px;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   &.disabled-day {
-    background-color: #ECECEC;
+    background-color: $disableddaycolor;
   }
 
   &.invalid-day {
-    background-color: $tempcolor !important;
+    background-color: $invaliddaycolor !important;
   }
 
   .appointment-description {

@@ -22,7 +22,7 @@ export default class CalendarContainer extends React.Component {
     const months = ["August 2019", "September 2019", "October 2019", "November 2019", "December 2019"]
 
     return (
-      <div>
+      <div className="CalendarContainer">
         {_.map(months, this._renderAllCalendars)}
       </div>
     )
