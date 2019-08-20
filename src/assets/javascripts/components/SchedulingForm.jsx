@@ -19,27 +19,15 @@ export default class SchedulingForm extends React.Component {
   constructor(props) {
     super(props)
 
-    let editing = true
-
-    if (this.props.appointment.description) {
-      editing = false
-    }
-
     this.state = {
-      editing: editing
+      editing: !this.props.appointment.description
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
-      let editing = true
-
-      if (this.props.appointment.description) {
-        editing = false
-      }
-
       this.setState({
-        editing: editing
+        editing: !this.props.appointment.description
       })
     }
   }
