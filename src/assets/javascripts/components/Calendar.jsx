@@ -27,24 +27,20 @@ export default class Calendar extends React.Component {
   //////////////////////////////////////////////////////////////////////////
 
   render() {
-    const { appointmentEditorCollapsed } = this.state
+    const { appointmentEditorCollapsed, daysInMonth } = this.state
+    const { month } = this.props
 
-    // date and time manipulation to create the calendar
-    // const now = moment()
+    const currMonthDate = moment(month)
 
-    const currMonthDate = moment(this.props.month)
-
-    // get the day of the week of the first day of the month
+    // first day of the month's weekday is used to offset valid days on rendered calendar
     const calendarStartOffset = currMonthDate.startOf('month').day()
 
-    // get the array of Sunday dates
-    const weekStarts = this._getWeekStarts(1 - calendarStartOffset, this.state.daysInMonth)
+    // Sunday dates used to render calendar correctly
+    const weekStarts = this._getWeekStarts(1 - calendarStartOffset, daysInMonth)
 
     return (
       <div className="Calendar">
-        <MonthHeader
-          month={this.props.month}
-        />
+        <MonthHeader month={month} />
         <WeekHeader />
         {_.map(weekStarts, this._renderWeek)}
         { appointmentEditorCollapsed ? null : this._renderAppointmentEditor() }
@@ -69,25 +65,24 @@ export default class Calendar extends React.Component {
   }
 
   _renderAppointmentEditor = () => {
-
-    const { appointments, date } = this.state
+    const { appointments, date, time, description } = this.state
     const { month } = this.props
 
     let existingAppointment = {}
 
-   if (appointments[date]) {
-     existingAppointment = appointments[date]
-   }
+    if (appointments[date]) {
+      existingAppointment = appointments[date]
+    }
 
     return (
       <SchedulingForm
-        onCancel={this._hideAppointmentForm}
+        onCancel={() => {this.setState({appointmentEditorCollapsed: true})}}
         onSave={this._onSaveAppointment}
         onDelete={this._onDeleteAppointment}
         updateValue={(appointmentText) => {this.setState({description: appointmentText})}}
-        value={this.state.description}
         updateTimeValue={(appointmentTime) => {this.setState({time: appointmentTime})}}
-        time={this.state.time}
+        value={description}
+        time={time}
         date={date}
         month={month}
         appointment={existingAppointment}
@@ -97,12 +92,8 @@ export default class Calendar extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////
 
-  /*
-    When an appointment is saved, update state with the appointment
-    to display it on the calendar
-  */
   _onSaveAppointment = () => {
-    const { appointments, date, description, time, month } = this.state
+    const { appointments, date, description, time } = this.state
 
     const appointmentDetails = {
       description: description,
@@ -110,11 +101,6 @@ export default class Calendar extends React.Component {
     }
 
     appointments[date] = appointmentDetails
-    console.log(appointments)
-
-    const monthObj = {}
-    monthObj[month] = appointments
-    console.log(monthObj)
 
     this.setState(_.merge({appointments}, this._clearSelectedAppointment()))
   }
@@ -127,12 +113,7 @@ export default class Calendar extends React.Component {
     this.setState(_.merge({appointments}, this._clearSelectedAppointment()))
   }
 
-  /*
-    When a day is clicked, update state with the day's date in preparation
-    for creating/editing an appointment
-  */
   _onClickDay = (month, date) => {
-
     const { appointments } = this.state
 
     let description = ""
@@ -151,17 +132,6 @@ export default class Calendar extends React.Component {
     })
   }
 
-  /*
-    Unhides the appointment field for creating or editing an appointment
-  */
-  _hideAppointmentForm = () => {
-    this.setState({appointmentEditorCollapsed: true})
-  }
-
-  /*
-    Generate the initial starting week information to render the calendar.
-    Each item in the array is day number of the Week's Sunday
-  */
   _getWeekStarts = (start, end) => {
     const weekStarts = []
 
@@ -174,15 +144,12 @@ export default class Calendar extends React.Component {
     return weekStarts
   }
 
-  /*
-    Clear out any appointment information from state - used in initial state
-    declaration and after using save/cancel
-  */
   _clearSelectedAppointment = () => {
     const currMonthDate = moment(this.props.month)
 
     const month = currMonthDate.format("M")
 
+    // dayOfMonth is used to set which days are valid or invalid. For future months, set to 0 so all days are valid
     let dayOfMonth = 0
 
     if (moment().format("M") === month) {

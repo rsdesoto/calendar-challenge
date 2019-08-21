@@ -34,7 +34,7 @@ export default class Day extends React.Component {
     const { valid, enabled, onClick, month } = this.props
 
     if (valid && enabled) {
-      onClick(month,day)
+      onClick(month, day)
     } else if (valid) {
       alert("Can't make past appointments")
     }

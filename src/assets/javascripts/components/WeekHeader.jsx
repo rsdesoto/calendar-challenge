@@ -1,12 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-
 export default class Week extends React.Component {
-  static propTypes = {
-
-  }
-  
   render() {
     const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
 

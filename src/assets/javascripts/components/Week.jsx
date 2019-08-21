@@ -14,8 +14,8 @@ export default class Week extends React.Component {
     month: PropTypes.string
   }
 
-  // for each week - get the start date of that sunday
-  // if the number is negative, create a DISABLED day field
+  // for each week - get the start date of that Sunday
+  // if the number is negative, create a invalid day field
   // if the number is positive, create a Day with that number
 
   render() {
@@ -33,6 +33,7 @@ export default class Week extends React.Component {
   _renderDay = (weekDay) => {
     const { onClickDay, appointments, daysInMonth, dayOfMonth, month } = this.props
 
+    // valid refers to valid dates. enabled refers to dates that are today or later
     let valid = true
     let enabled = true
 
