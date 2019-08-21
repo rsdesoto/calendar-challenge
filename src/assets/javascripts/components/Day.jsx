@@ -47,7 +47,7 @@ export default class Day extends React.Component {
       return null
     } else {
       return (
-        <div>
+        <div className="appointment-description-container">
           <div className="appointment-description">{appointments[day].description}</div>
           <div className="appointment-time">{`Time: ${appointments[day].time}`}</div>
         </div>
