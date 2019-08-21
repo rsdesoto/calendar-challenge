@@ -1,3 +1,7 @@
 .Week {
   display: flex;
+
+  @media (max-width: $screen-breakpoint) {
+    display: block;
+  }
 }

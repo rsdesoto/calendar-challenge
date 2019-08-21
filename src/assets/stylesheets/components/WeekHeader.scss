@@ -10,4 +10,8 @@
     padding: 5px 0;
     box-sizing: border-box;
   }
+
+  @media (max-width: $screen-breakpoint) {
+    display: none;
+  }
 }

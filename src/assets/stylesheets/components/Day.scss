@@ -46,4 +46,12 @@
   .appointment-time {
     font-size: 12px;
   }
+
+  @media (max-width: $screen-breakpoint) {
+    &.invalid-day {
+      display: none;
+    }
+
+    width: $breakpoint-width;
+  }
 }

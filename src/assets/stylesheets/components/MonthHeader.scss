@@ -7,4 +7,8 @@
   font-weight: bold;
   border: 1px black solid;
   box-sizing: border-box;
+
+  @media (max-width: $screen-breakpoint) {
+    width: $breakpoint-width;
+  }
 }
