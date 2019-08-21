@@ -11,7 +11,7 @@ import WeekHeader from './WeekHeader'
 export default class Calendar extends React.Component {
   static propTypes = {
     now: PropTypes.object,
-    month: PropTypes.string
+    renderMonth: PropTypes.object
   }
 
   constructor(props) {
@@ -28,19 +28,17 @@ export default class Calendar extends React.Component {
 
   render() {
     const { appointmentEditorCollapsed, daysInMonth } = this.state
-    const { month } = this.props
-
-    const currMonthDate = moment(month)
+    const { renderMonth } = this.props
 
     // first day of the month's weekday is used to offset valid days on rendered calendar
-    const calendarStartOffset = currMonthDate.startOf('month').day()
+    const calendarStartOffset = renderMonth.startOf('month').day()
 
     // Sunday dates used to render calendar correctly
     const weekStarts = this._getWeekStarts(1 - calendarStartOffset, daysInMonth)
 
     return (
       <div className="Calendar">
-        <MonthHeader month={month} />
+        <MonthHeader month={renderMonth.format("MMMM YYYY")} />
         <WeekHeader />
         {_.map(weekStarts, this._renderWeek)}
         { appointmentEditorCollapsed ? null : this._renderAppointmentEditor() }
@@ -66,7 +64,7 @@ export default class Calendar extends React.Component {
 
   _renderAppointmentEditor = () => {
     const { appointments, date, time, description } = this.state
-    const { month } = this.props
+    const { renderMonth } = this.props
 
     let existingAppointment = {}
 
@@ -84,7 +82,7 @@ export default class Calendar extends React.Component {
         value={description}
         time={time}
         date={date}
-        month={month}
+        month={renderMonth.format("MMMM YYYY")}
         appointment={existingAppointment}
       />
     )
@@ -145,7 +143,7 @@ export default class Calendar extends React.Component {
   }
 
   _clearSelectedAppointment = () => {
-    const currMonthDate = moment(this.props.month)
+    const currMonthDate = this.props.renderMonth
 
     const month = currMonthDate.format("M")
 

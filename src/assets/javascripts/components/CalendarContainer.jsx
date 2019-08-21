@@ -6,11 +6,9 @@ import Calendar from './Calendar'
 
 export default class CalendarContainer extends React.Component {
   render() {
-    /*
-      note: this calendar was built August 2019. The rest of 2019 was included for reference
-      to show this can be built out as needed.
-    */
-    const months = ["August 2019", "September 2019", "October 2019", "November 2019", "December 2019"]
+
+    // note: this calendar will provide the current month and the next 5 months.
+    const months = this._getMonths()
 
     return (
       <div className="CalendarContainer">
@@ -25,8 +23,19 @@ export default class CalendarContainer extends React.Component {
     return (
       <Calendar
         now={now}
-        month={month}
+        renderMonth={month}
+        key={month}
       />
     )
+  }
+
+  _getMonths = () => {
+    const monthArr = []
+
+    _.map([0,1,2,3,4,5], (i) => {
+      monthArr.push(moment().startOf('month').add(i,'M'))
+    })
+
+    return monthArr
   }
 }

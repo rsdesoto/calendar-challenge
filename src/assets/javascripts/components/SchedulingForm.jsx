@@ -36,15 +36,8 @@ export default class SchedulingForm extends React.Component {
   }
 
   render() {
-    const { date, appointment } = this.props
+    const { appointment } = this.props
     const { editing } = this.state
-
-    console.log(date)
-    console.log(this.props.appointment)
-
-    if (appointment.description) {
-      console.log("Appointment exists")
-    }
 
     return (
       <div className="SchedulingForm">
