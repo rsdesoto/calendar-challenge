@@ -21,11 +21,11 @@ export default class Day extends React.Component {
         <div className="day-number">
           { valid ? day : null }
         </div>
-        <div className="day-info"
+        <button className="day-info"
           onClick={() => {this._onClickDay(day)}}
         >
           {this._renderAppointment()}
-        </div>
+        </button>
       </div>
     )
   }

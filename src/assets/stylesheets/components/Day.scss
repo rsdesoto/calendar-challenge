@@ -1,4 +1,14 @@
 .Day {
+  button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
   border: 1px solid black;
   width: $daywidth;
   height: $dayheight;
@@ -16,7 +26,6 @@
   .day-info {
     width: 100%;
     height: $dayheight - $daynumberheight;
-    padding: 2px;
     overflow: hidden;
     box-sizing: border-box;
   }
