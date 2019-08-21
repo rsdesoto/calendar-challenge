@@ -8,6 +8,7 @@ A simple React calendar app.
 - Dates are displayed
 - Appointments can be edited or deleted
 - Design is responsive
+- Days are buttons for keyboard accessibility
 
 ## Technologies used
 - Lodash -- JavaScript utility library used for ease of coding
