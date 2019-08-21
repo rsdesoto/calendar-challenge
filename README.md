@@ -1,6 +1,8 @@
 ## React Calendar
 A simple React calendar app.
 
+To see this deployed, click [here](https://react-calendar-desoto.herokuapp.com/)
+
 - All dates are displayed for August through the end of 2019
 - Appointments can only be created today or later
 - No two appointments overlap
