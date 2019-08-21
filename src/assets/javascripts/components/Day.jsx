@@ -36,7 +36,7 @@ export default class Day extends React.Component {
     if (valid && enabled) {
       onClick(month, day)
     } else if (valid) {
-      alert("Can't make past appointments")
+      alert("This day is in the past. Please choose a different date.")
     }
   }
 

@@ -6,12 +6,15 @@ import CalendarContainer from './assets/javascripts/components/CalendarContainer
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="calendar-description">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          To create an appointment, click on a day.
         </p>
+        <p>
+          Please note -- you cannot make appointments prior to today.
+        </p>
+      </div>
         <CalendarContainer />
-      </header>
     </div>
   );
 }
