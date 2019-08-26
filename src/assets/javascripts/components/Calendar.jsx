@@ -91,7 +91,31 @@ export default class Calendar extends React.Component {
   //////////////////////////////////////////////////////////////////////////
 
   _onSaveAppointment = () => {
-    const { appointments, date, description, time } = this.state
+    const { appointments, month, date, description, time, trueNow } = this.state
+
+    console.log(trueNow)
+    // moment('2010-10-20').isBefore('2010-12-31', 'year'); // false
+
+    console.log(trueNow.format("HH:hh"))
+
+    // if date is the same as today's date:
+    // get time from trueNow
+    // compare with moment(planned time).isBefore(current time, 'minute')
+
+    const trueMonth = trueNow.format("M")
+
+    const dayOfMonth = trueNow.date()
+
+    if (dayOfMonth === date && trueMonth === month) {
+      console.log("Same day")
+      if (time < trueNow.format("HH:hh")) {
+        console.log("bad time")
+      }
+    }
+
+    console.log(time)
+
+
 
     const appointmentDetails = {
       description: description,
@@ -163,7 +187,8 @@ export default class Calendar extends React.Component {
       time: "12:00",
       daysInMonth: daysInMonth,
       month: month,
-      dayOfMonth: dayOfMonth
+      dayOfMonth: dayOfMonth,
+      trueNow: moment()
     }
   }
 }
